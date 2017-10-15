@@ -364,6 +364,16 @@ Note that if you use this option you are responsible for stating the entire list
 
 The content still gets escaped properly, with the exception of the `script` and `style` tags. *Allowing either `script` or `style` leaves you open to XSS attacks. Don't do that* unless you have good reason to trust their origin.
 
+### Escaping the content of a disallowed tag
+
+Instead of discarding, or keeping text only, you may enable escaping of the entire content:
+
+```javascript
+escapeDisallowedTags: true
+```
+
+This will transform `<disallowed>content</disallowed>` to `&lt;disallowed&gt;content&lt;/disallowed&gt;`
+
 ## Changelog
 
 1.14.1: documented `allowProtocolRelative` option. No code changes from 1.14.0, released a few moments ago.

@@ -151,8 +151,8 @@ function sanitizeHtml(html, options, _recursing) {
 
       if (options.allowedTags && options.allowedTags.indexOf(name) === -1) {
         skip = true;
-        if (!options.escapeUnallowed) {
-          // We don't want to skip unallowed tags, just escape them
+        if (!options.escapeDisallowedTags) {
+          // We don't want to skip disallowedTags tags, just escape them
           if (nonTextTagsArray.indexOf(name) !== -1) {
             skipText = true;
             skipTextDepth = 1;
@@ -162,7 +162,7 @@ function sanitizeHtml(html, options, _recursing) {
       }
       depth++;
       if (skip) {
-        if (!options.escapeUnallowed) {
+        if (!options.escapeDisallowedTags) {
           // We want the contents but not this tag
           return;
         }
@@ -362,7 +362,7 @@ sanitizeHtml.defaults = {
   allowedTags: [ 'h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'a', 'ul', 'ol',
     'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'br', 'div',
     'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td', 'pre' ],
-  escapeUnallowed: false,
+  escapeDisallowedTags: false,
   allowedAttributes: {
     a: [ 'href', 'name', 'target' ],
     // We don't currently allow img itself by default, but this

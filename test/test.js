@@ -20,7 +20,7 @@ describe('sanitizeHtml', function() {
     assert.equal(sanitizeHtml('<div><wiggly>Hello</wiggly></div>'), '<div>Hello</div>');
   });
   it('should escape markup not whitelisted', function() {
-    assert.equal(sanitizeHtml('<div><wiggly>Hello</wiggly></div>', { escapeUnallowed: true }), '<div>&lt;wiggly&gt;Hello&lt;/wiggly&gt;</div>');
+    assert.equal(sanitizeHtml('<div><wiggly>Hello</wiggly></div>', { escapeDisallowedTags: true }), '<div>&lt;wiggly&gt;Hello&lt;/wiggly&gt;</div>');
   });
   it('should accept a custom list of allowed tags', function() {
     assert.equal(sanitizeHtml('<blue><red><green>Cheese</green></red></blue>', { allowedTags: [ 'blue', 'green' ] }), '<blue><green>Cheese</green></blue>');
@@ -537,13 +537,13 @@ describe('sanitizeHtml', function() {
   });
   it('should escape markup not whitelisted and all its children', function() {
     assert.equal(
-        sanitizeHtml('<div><wiggly>Hello<p>World</p></wiggly></div>', { escapeUnallowed: true }),
+        sanitizeHtml('<div><wiggly>Hello<p>World</p></wiggly></div>', { escapeDisallowedTags: true }),
         '<div>&lt;wiggly&gt;Hello&lt;p&gt;World&lt;/p&gt;&lt;/wiggly&gt;</div>'
     );
   });
   it('should escape markup not whitelisted even with not whitelisted children', function() {
     assert.equal(
-        sanitizeHtml('<div><wiggly>Hello<p>World</p><tiggly>JS</tiggly></wiggly></div>', { escapeUnallowed: true }),
+        sanitizeHtml('<div><wiggly>Hello<p>World</p><tiggly>JS</tiggly></wiggly></div>', { escapeDisallowedTags: true }),
         '<div>&lt;wiggly&gt;Hello&lt;p&gt;World&lt;/p&gt;&lt;tiggly&gt;JS&lt;/tiggly&gt;&lt;/wiggly&gt;</div>'
     );
   });
